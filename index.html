@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makeup Artist Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #ff4081;
+        }
+        input, button, select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e91e63;
+        }
+        .contact {
+            margin-top: 20px;
+        }
+        .contact a {
+            text-decoration: none;
+            color: #ff4081;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Book Your Makeup Session</h1>
+        <form id="bookingForm">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="tel" id="phone" placeholder="Your Phone Number" required>
+            <select id="date" required>
+                <option value="" disabled selected>Select a Date</option>
+                <option>Today</option>
+                <option>Tomorrow</option>
+                <option>Pick a Date</option>
+            </select>
+            <input type="date" id="customDate" style="display:none;" required>
+            <select id="time" required>
+                <option value="" disabled selected>Select a Time</option>
+                <option>10:00 AM</option>
+                <option>11:00 AM</option>
+                <option>12:00 PM</option>
+                <option>01:00 PM</option>
+                <option>02:00 PM</option>
+                <option>03:00 PM</option>
+                <option>04:00 PM</option>
+                <option>05:00 PM</option>
+                <option>06:00 PM</option>
+            </select>
+            <button type="button" onclick="sendToWhatsApp()">Book Now</button>
+        </form>
+        <div class="contact">
+            <p>Follow us on <a href="https://www.instagram.com/makeupartist_payaldhakne?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Instagram</a></p>
+            <p>Call us: <a href="tel:+91 9823991091">+91 9823991091</a></p>
+        </div>
+    </div>
+    <script>
+        document.getElementById("date").addEventListener("change", function() {
+            if (this.value === "Pick a Date") {
+                document.getElementById("customDate").style.display = "block";
+            } else {
+                document.getElementById("customDate").style.display = "none";
+            }
+        });
+
+        function sendToWhatsApp() {
+            var name = document.getElementById("name").value;
+            var phone = document.getElementById("phone").value;
+            var date = document.getElementById("date").value;
+            var customDate = document.getElementById("customDate").value;
+            var time = document.getElementById("time").value;
+            
+            if (date === "Pick a Date") {
+                date = customDate;
+            }
+            
+            var message = `Hello, I want to book a makeup session. My details:\nName: ${name}\nPhone: ${phone}\nDate: ${date}\nTime: ${time}`;
+            var whatsappURL = `https://wa.me/919823991091?text=${encodeURIComponent(message)}`;
+            window.open(whatsappURL, "_blank");
+        }
+    </script>
+</body>
+</html>
